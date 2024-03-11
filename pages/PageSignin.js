@@ -9,8 +9,8 @@ import { PageTemplate } from "../lib/PageTemplate.js";
             return `
             
                 <section class="container py-5">
-                    <main class="">
-                        <form>
+                    <main form-signin w-100 m-auto style = "margin: auto !important">
+                        <form style= "max-width: 330px">
                         <img class="mb-4" src="./img/bootstrap-logo.svg" alt="" width="72" height="57">
                         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 

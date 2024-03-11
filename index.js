@@ -7,6 +7,7 @@ import { PageAbout } from './pages/PageAbout.js';
 import { PageServicesList } from './pages/PageServicesList.js';
 import { PageServiceInner } from './pages/PageServiceInner.js';
 import { PageSignin } from './pages/PageSignin.js';
+import { PageCart } from './pages/PageCart.js';
 
 const app = express();
 const port = 4811;
@@ -35,6 +36,11 @@ app.get('/services/:serviceId', (req, res) => {
 
 app.get('/sign-in', (req, res) => {
     const page = new PageSignin();
+    res.send(page.render());
+});
+
+app.get('/cart', (req, res) => {
+    const page = new PageCart();
     res.send(page.render());
 });
 
