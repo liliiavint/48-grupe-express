@@ -9,26 +9,7 @@ class PageServiceInner extends PageTemplate {
         this.params = params;
     }
 
-    main() {
-        let serviceObj = null;
-
-        for (const service of servicesData) {
-            if (service.id === this.params.serviceId) {
-                serviceObj = service;
-                break;
-            }
-        }
-
-        if (serviceObj === null) {
-            return `
-                <main>
-                    <section class="container py-5">
-                        <h1 class="display-5 fw-bold">Service not found</h1>
-                        <a href="/services" class="btn btn-primary btn-lg">Go to services list</a>
-                    </section>
-                </main>`;
-        }
-
+    serviceHTML(serviceObj) {
         return `
             <main>
                 <section class="container py-5">
@@ -55,6 +36,29 @@ class PageServiceInner extends PageTemplate {
                     </div>
                 </section>
             </main>`;
+    }
+
+    serviceNotFoundHTML() {
+        return `
+            <main>
+                <section class="container py-5">
+                    <h1 class="display-5 fw-bold">Service "${this.params.serviceId}" not found</h1>
+                    <a href="/services" class="btn btn-primary btn-lg">Go to services list</a>
+                </section>
+            </main>`;
+    }
+
+    main() {
+        let serviceObj = null;
+
+        for (const service of servicesData) {
+            if (service.id === this.params.serviceId) {
+                serviceObj = service;
+                break;
+            }
+        }
+
+        return serviceObj ? this.serviceHTML(serviceObj) : this.serviceNotFoundHTML();
     }
 }
 
