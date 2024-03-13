@@ -50,5 +50,98 @@ apiRouter.get('/api/:a1/:c1/:b1', (req, res) => {
 // apiRouter.get('/api......', (req, res) => {
 //     res.send('7/5=12');
 // });
+apiRouter.get('/api', (req, res) => {
+    return res.send('Sveiki atvyke i API puslapi. Pasirinkite viena is galimu veiksmu: suma, atimtis, daugyba, dalyba');
+});
 
+apiRouter.get('/api/:veiksmas', (req, res) => {
+    const mathFunc = req.params.veiksmas;
+    if (mathFunc !== 'suma' && mathFunc !== 'atimtis' && mathFunc !== 'daugyba' && mathFunc !== 'dalyba') {
+        return res.send('Norima atlikti funkcija yra neatpazinta');
+    }
+    return res.send('Norint susumuoti, reikia nurodyti 2 skaicius');
+});
+
+apiRouter.get('/api/:veiksmas/:pirmas', (req, res) => {
+    return res.send('Norint susumuoti, dar truksta vieno skaiciaus');
+});
+
+apiRouter.get('/api/:veiksmas/:a/:b', (req, res) => {
+    const a = +req.params.a;
+    const b = +req.params.b;
+
+    if (isNaN(a)) {
+        return res.send(`Pirmas parametras nera tikras skaicius`);
+    }
+    if (isNaN(b)) {
+        return res.send(`Antras parametras nera tikras skaicius`);
+    }
+
+    const sum = +(a + b).toFixed(10);
+    return res.send(`${a}+${b}=${sum}`);
+});
+
+
+// Reikia priimti varda ir pavarde, ir graziname inicialus.
+// /api/abbr/chuck/norris => C.N.
+apiRouter.get('/abbr', (req, res) => {
+    return res.send('Sveiki atvyke i ABBR puslapi. Iveskite prasome Varde ir Pavarde');
+});
+
+apiRouter.get('/abbr/:v/:p', (req, res) => {
+    const varde = req.params.v;
+    const pavarde = req.params.p;
+    
+    
+    return res.send(`${varde[0].toUpperCase()}.${pavarde[0].toUpperCase()}.`);
+});
+
+// Kreipiantis konkreciai i toli URL yra grazinamas laikas: hh:mm:ss
+apiRouter.get('/time', (req, res) => {
+    const x = new Date().toLocaleTimeString();
+    return res.send(`${x}`);
+});
+
+// Kreipiantis konkreciai i toli URL yra grazinamas laikas tokiu formatu hh:mm:ss, bet visi skaiciai yra zodziai
+// pvz.: 10:57:14 => desimt valandu, penkiasdesimt septynios minutes, keturiolika sekundziu
+// pasistenkti apgalvoti visas galimas gramatikos situacijas
+
+apiRouter.get('/time-as-text', (req, res) => {
+    return res.send('Sveiki atvyke i time-as-text puslapi. Iveskite prasome laiko');
+});
+apiRouter.get('/time-as-text/:h/:m/:s', (req, res) => {
+    
+    function numberName(num) {
+        
+        const digitWord = ['nulio', 'vienos', 'dviejų', 'trių', 'keturių', 'penkių', 'šešių', 'septynių', 
+            'aštuonių', 'devynių', 'dešimties', 'vienuolikos', 'dvylikos', 'trylikos', 'keturiolikos', 'penkiolikos', 'šešiolikos', 
+            'septyniolikos', 'aštuoniolikos', 'devyniolikos', 'dvidešimties', 'dvidešimt pirmos', 'dvidešimt antros', 'dvidešimt trečios', 
+            'dvidešimt ketvirtos', 'dvidešimt penktos', 'dvidešimt šeštos', 'dvidešimt septyntos', 'dvidešimt aštuntos', 'dvidešimt devintos',
+            'trisdešimt', 'trisdešimt vienas', 'trisdešimt du', 'trisdešimt trys', 'trisdešimt keturi', 
+            'trisdešimt penki', 'trisdešimt šeši', 'trisdešimt septyni', 'trisdešimt aštuoni', 'trisdešimt devyni',
+            'keturiasdešimt', 'keturiasdešimt vienas', 'keturiasdešimt du', 'keturiasdešimt trys', 'keturiasdešimt keturi',
+            'keturiasdešimt penki', 'keturiasdešimt šeši', 'keturiasdešimt septyni', 'keturiasdešimt aštuoni', 'keturiasdešimt devyni', 'penkiasdešimt',
+            'penkiasdešimt vienas', 'penkiasdešimt du', 'penkiasdešimt trys', 'penkiasdešimt keturi', 'penkiasdešimt penki', 'penkiasdešimt šeši', 'penkiasdešimt septyni',
+            'penkiasdešimt aštuoni', 'penkiasdešimt devyni'];
+          
+        const result = [];
+    
+        for (let i = 0; i < digitWord.length; i++) {
+            if(i === parseInt(num)){
+                result.push(digitWord[i]);
+            }
+        }
+    
+        return result.join(' ');
+    }
+    
+    const hour = numberName(req.params.h);
+    const minute = numberName(req.params.m);
+    const second = numberName(req.params.s);
+
+    parseInt(req.params.h) < 0 || parseInt(req.params.h) > 24 || parseInt(req.params.m) < 0 || parseInt(req.params.m) > 59 
+    || parseInt(req.params.s) < 0 || parseInt(req.params.s) > 59 ? res.send("Iveskite teisingas laikos!"):
+
+    res.send(`${hour} val.: ${minute} min. : ${second} sec.`);
+});
 export { apiRouter };

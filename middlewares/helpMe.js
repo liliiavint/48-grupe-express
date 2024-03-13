@@ -10,9 +10,7 @@ let requestCount = 0;
 // }
 function helpMe(req, res, next) {
 
-
     req.timeItHasHappened = new Date().toLocaleString();
-
     requestCount++;
     console.log(req.timeItHasHappened, '>', requestCount, req.url);
 
