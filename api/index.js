@@ -112,11 +112,10 @@ apiRouter.get('/time-as-text', (req, res) => {
 apiRouter.get('/time-as-text/:h/:m/:s', (req, res) => {
     
     function numberName(num) {
-        
-        const digitWord = ['nulio', 'vienos', 'dviejų', 'trių', 'keturių', 'penkių', 'šešių', 'septynių', 
-            'aštuonių', 'devynių', 'dešimties', 'vienuolikos', 'dvylikos', 'trylikos', 'keturiolikos', 'penkiolikos', 'šešiolikos', 
-            'septyniolikos', 'aštuoniolikos', 'devyniolikos', 'dvidešimties', 'dvidešimt pirmos', 'dvidešimt antros', 'dvidešimt trečios', 
-            'dvidešimt ketvirtos', 'dvidešimt penktos', 'dvidešimt šeštos', 'dvidešimt septyntos', 'dvidešimt aštuntos', 'dvidešimt devintos',
+        const digitWord = ['nulio', 'pirma', 'antra', 'treča', 'ketvirta', 'penkta', 'šešta', 'septintą', 
+            'aštuntą', 'devinta', 'dešimta', 'vienuolikta', 'dvylikta', 'trylikta', 'keturiolikta', 'penkiolikta', 'šešiolikta', 
+            'septyniolikta', 'aštuoniolikta', 'devyniolikta', 'dvidešimta', 'dvidešimt pirma', 'dvidešimt antra', 'dvidešimt treča', 
+            'dvidešimt keturi', 'dvidešimt penki', 'dvidešimt šeši', 'dvidešimt septyni', 'dvidešimt aštuoni', 'dvidešimt devyni',
             'trisdešimt', 'trisdešimt vienas', 'trisdešimt du', 'trisdešimt trys', 'trisdešimt keturi', 
             'trisdešimt penki', 'trisdešimt šeši', 'trisdešimt septyni', 'trisdešimt aštuoni', 'trisdešimt devyni',
             'keturiasdešimt', 'keturiasdešimt vienas', 'keturiasdešimt du', 'keturiasdešimt trys', 'keturiasdešimt keturi',
