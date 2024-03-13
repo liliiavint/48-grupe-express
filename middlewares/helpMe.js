@@ -9,7 +9,7 @@ let requestCount = 0;
 //     next();
 // }
 function helpMe(req, res, next) {
-    req.timeItHasHappened = new Date().toLocaleString(); // Change to current date
+    req.timeItHasHappened = new Date().toLocaleString();
     
     requestCount++;
     console.log(req.timeItHasHappened, '>', requestCount, req.url, req.ip);
