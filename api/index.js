@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { formatTimeNumber } from "../lib/formatTimeNumber.js";
 import { formatTimeAsText, timeValueTitle } from "../lib/formatTimeAsText.js";
+import { ChangeEnd } from "../lib/ChangeEnd.js";
 
 const apiRouter = Router();
 
@@ -85,6 +86,11 @@ apiRouter.get('/api/time-as-text', (req, res) => {
 
     const time = `${h} ${ht}, ${m} ${mt}, ${s} ${st}`;
     return res.status(200).send(time);
+});
+apiRouter.get('/api/change-end/:word', (req, res) => {
+    const word = ChangeEnd(req.params.word.trim());
+
+    return res.send(word);
 });
 
 
