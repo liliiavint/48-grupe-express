@@ -6,6 +6,7 @@ import { PageServiceInner } from '../pages/PageServiceInner.js';
 import { PageSignin } from '../pages/PageSignin.js';
 import { PageCart } from '../pages/PageCart.js';
 import { Page404 } from '../pages/Page404.js';
+import { PageCalc } from "../pages/PageCalc.js";
 
 const router = Router();
 
@@ -31,6 +32,11 @@ router.get('/services/:serviceId', (req, res) => {
 
 router.get('/sign-in', (req, res) => {
     const page = new PageSignin();
+    res.send(page.render());
+});
+
+router.get('/calc', (req, res) => {
+    const page = new PageCalc();
     res.send(page.render());
 });
 

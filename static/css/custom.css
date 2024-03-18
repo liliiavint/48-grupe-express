@@ -1,0 +1,17 @@
+.calc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.calc-form > .form-row {
+    display: flex;
+    gap: 1rem;
+    font-size: 2rem;
+}
+.calc-form input {
+    width: 8rem;
+}
+.calc-form button {
+    padding: 0.5rem 2rem;
+}
